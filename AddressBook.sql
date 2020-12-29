@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `AddressBook` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `AddressBook`;
 -- MySQL dump 10.13  Distrib 8.0.17, for macos10.14 (x86_64)
 --
 -- Host: localhost    Database: AddressBook
@@ -26,7 +24,7 @@ DROP TABLE IF EXISTS `address`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `address` (
   `addressNo` int(11) NOT NULL AUTO_INCREMENT,
-  `user_userNo` int(11) NOT NULL,
+  `user_userId` varchar(45) NOT NULL,
   `addressName` varchar(45) DEFAULT NULL,
   `addressPhone` varchar(45) DEFAULT NULL,
   `addressGroup` varchar(45) DEFAULT NULL,
@@ -35,11 +33,11 @@ CREATE TABLE `address` (
   `addressBirth` varchar(45) DEFAULT NULL,
   `addressImage` varchar(45) DEFAULT NULL,
   `addressStar` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`addressNo`,`user_userNo`),
+  PRIMARY KEY (`addressNo`,`user_userId`),
   UNIQUE KEY `addressNo_UNIQUE` (`addressNo`),
-  KEY `fk_address_user1_idx` (`user_userNo`),
-  CONSTRAINT `fk_address_user1` FOREIGN KEY (`user_userNo`) REFERENCES `user` (`userNo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `FK_address_user1_idx` (`user_userId`),
+  CONSTRAINT `FK_address_user1` FOREIGN KEY (`user_userId`) REFERENCES `user` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,14 +57,13 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `userNo` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` varchar(45) DEFAULT NULL,
+  `userId` varchar(45) NOT NULL,
   `userPw` varchar(45) DEFAULT NULL,
   `userName` varchar(45) DEFAULT NULL,
   `userPhone` varchar(45) DEFAULT NULL,
   `userEmail` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`userNo`),
-  UNIQUE KEY `userNo_UNIQUE` (`userNo`)
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `userId_UNIQUE` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -88,4 +85,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-23 16:46:01
+-- Dump completed on 2020-12-29 10:53:53
